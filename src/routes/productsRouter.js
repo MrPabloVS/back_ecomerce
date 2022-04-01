@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const router = Router()
 
-const fs = require("fs")
+const fs = require("fs");
+const path = require("path");
 
-const db = fs.readFileSync("productos.json")
+const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","products.json")))
 
 
 
@@ -15,7 +16,7 @@ router.get('/:id?', (request, response) => {
             respuesta = element
         }
     });
-    
+    response.status(200).json(respuesta)
     response.send(respuesta)
 })
 

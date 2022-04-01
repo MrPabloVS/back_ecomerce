@@ -1,9 +1,10 @@
 const { Router } = require("express")
 const fs = require("fs")
+const path = require("path")
 
 const router = Router()
-const db = fs.readFileSync("carts.json")
-const products = fs.readFileSync("products.json")
+const db = JSON.parse(fs.readFileSync(path.join(__dirname,"..","db","carts.json")))
+const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","products.json")))
 
 router.post("/", (req, res) => {
     db.push({id: db.length + 1})
