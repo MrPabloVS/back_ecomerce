@@ -12,10 +12,12 @@ router.get('/:id?', (request, response) => {
     let respuesta = db
 
     db.forEach(element => {
-        if (request.id === element.id) {
+        if (request.params.id === element.id) {
             respuesta = element
         }
     });
+
+      
     response.status(200).json(respuesta)
     response.send(respuesta)
 })
@@ -39,8 +41,8 @@ router.put('/:id', (request, response) => {
     if (process.env.ADMIN) {
         
      response.send({
-        "title": `Producto ${request.id}`,
-        "id": request.id,
+        "title": `Producto ${request.params.id}`,
+        "id": request.params.id,
         "img": "#",
         "price": 123
     })
@@ -48,7 +50,7 @@ router.put('/:id', (request, response) => {
     })
 
 router.delete('/:id', (request, response) => {
-    response.send(db[request.id])
+    response.send(db[request.params.id])
 })
 
 

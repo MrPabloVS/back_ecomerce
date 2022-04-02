@@ -4,29 +4,31 @@ const path = require("path")
 
 const router = Router()
 const db = JSON.parse(fs.readFileSync(path.join(__dirname,"..","db","carts.json")))
-const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","products.json")))
+const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
 
 router.post("/", (req, res) => {
     db.push({id: db.length + 1})
 
-    res.send(db.length + 1)
+    let respuesta = db
+    res.status(200).json(respuesta)
+    res.send(db)
 })
 
 router.delete("/:id", (req, res) => {
-    delete db[req.id]
+    delete db[req.params.id]
 })
 
 router.get("/:id/productos", (req, res) => {
-    res.send(db[req.id])
+    res.send(db[req.params.id])
 })
 
 router.post("/:id/productos", (req, res) => {
-    db[req.id].push(products)
+    db[req.params.id].push(products)
 })
 
 router.delete("/:id/productos/:id_prod", (req, res) => {
-    db[req.id].forEach(element => {
-        if (element === req.id_prod) {
+    db[req.params.id].forEach(element => {
+        if (element === req.params.id_prod) {
          element = []
         }
     });
