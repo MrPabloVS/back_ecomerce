@@ -4,37 +4,48 @@ const router = Router()
 const fs = require("fs");
 const path = require("path");
 
-const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","products.json")))
+const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
 
+const temporal = {
+    "id": db.length + 1,
+    "nombre": "zapatos",
+    "descripcion": "zapatos",
+    "codigo": "123456",
+    "foto": "http://foto.com",
+    "precio": 150,
+    "stock": 25,
+    "timestamp": 1648515364352
+  }
 
 
 router.get('/:id?', (request, response) => {
     let respuesta = db
 
-    db.forEach(element => {
-        if (request.params.id === element.id) {
-            respuesta = element
-        }
-    });
+    // db.forEach(element => {
+    //     if (request.params.id === element.id) {
+    //         respuesta = element
+    //     }
+    // });
 
-      
-    response.status(200).json(respuesta)
+    for (const i of db) {
+        if (i.id === request.params.id) {
+            respuesta.push(i)
+            
+        }
+    }
+
+    //const respuesta =  db.find((i) => i.id === request.params.id)  
+
+    //response.status(200).json(respuesta)
     response.send(respuesta)
 })
 
 router.post('/', (request, response) => {
     if (process.env.ADMIN) {
-        let id = db.length + 1
-     response.send({
-        "title": `Producto ${id}`,
-        "id": id,
-        "img": "#",
-        "price": 123,
-        "timeStamp": Date.now(),
-        "stock": 123
-    })
-    }
+        fs.writeFileSync(db.append(temporal))
     
+    }
+     response.send(db)
     });
 
 router.put('/:id', (request, response) => {
@@ -50,7 +61,8 @@ router.put('/:id', (request, response) => {
     })
 
 router.delete('/:id', (request, response) => {
-    response.send(db[request.params.id])
+    delete db[request.params.id]
+    response.send(db)
 })
 
 

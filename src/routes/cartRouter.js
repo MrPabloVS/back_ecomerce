@@ -3,8 +3,11 @@ const fs = require("fs")
 const path = require("path")
 
 const router = Router()
-const db = JSON.parse(fs.readFileSync(path.join(__dirname,"..","db","carts.json")))
-const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
+//const db = JSON.parse(fs.readFileSync(path.join(__dirname,"..","db","carts.json")))
+//const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
+
+const db = fs.readFileSync(path.join(__dirname,"..","db","carts.json"))
+const products = fs.readFileSync(path.join(__dirname, "..","db","productos.json"))
 
 router.post("/", (req, res) => {
     db.push({id: db.length + 1})
@@ -16,6 +19,7 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     delete db[req.params.id]
+    res.send(db)
 })
 
 router.get("/:id/productos", (req, res) => {
@@ -24,6 +28,7 @@ router.get("/:id/productos", (req, res) => {
 
 router.post("/:id/productos", (req, res) => {
     db[req.params.id].push(products)
+    res.send(db)
 })
 
 router.delete("/:id/productos/:id_prod", (req, res) => {
@@ -32,6 +37,7 @@ router.delete("/:id/productos/:id_prod", (req, res) => {
          element = []
         }
     });
+    res.send(db)
 })
 
 
