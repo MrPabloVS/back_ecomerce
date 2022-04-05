@@ -1,3 +1,6 @@
+//import { productController } from "../controllers/productController";
+
+const  productController  = require("../controllers/productController")
 const { Router } = require("express");
 const router = Router()
 
@@ -18,26 +21,17 @@ const temporal = {
   }
 
 
-router.get('/:id?', (request, response) => {
-    let respuesta = db
+router.get('/:id?', async (req, res) => {
+    const {id} = req.params
 
-    // db.forEach(element => {
-    //     if (request.params.id === element.id) {
-    //         respuesta = element
-    //     }
-    // });
+    if (typeof id === 'undefined') {
+        const respuesta = await productController.getAll()
 
-    for (const i of db) {
-        if (i.id === request.params.id) {
-            respuesta.push(i)
-            
-        }
+        res.send(respuesta)
     }
 
-    //const respuesta =  db.find((i) => i.id === request.params.id)  
-
-    //response.status(200).json(respuesta)
-    response.send(respuesta)
+    const respuesta = await productController.getById(Number(id))
+    res.send(respuesta)
 })
 
 router.post('/', (request, response) => {

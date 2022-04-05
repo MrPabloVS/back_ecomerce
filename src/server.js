@@ -14,5 +14,5 @@ app.get('/express_backend', (req, res) => {
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
   });
 
-app.use("/api/products", productsRouter)
-app.use("/api/cart", cartRouter)
+app.use("/api/productos", productsRouter)
+app.use("/api/carrito", cartRouter)
