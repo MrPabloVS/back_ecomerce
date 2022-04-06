@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 })
 
 router.delete("/:id", (req, res) => {
-    delete db[req.params.id]
+    delete db[req.params.id + 1]
     res.send(db)
 })
 
@@ -24,8 +24,7 @@ router.get("/:id/productos", async (req, res) => {
     
     const { id } = req.params
     const productos = await cartController.getCarrito(Number(id))
-    productos ? res.send({ productos }) : res.status(404).json({ status: 'carrito no encontrado' })
-
+    res.send(productos)
 })
 
 router.post("/:id/productos", async (req, res) => {

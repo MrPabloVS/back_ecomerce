@@ -5,18 +5,17 @@ class ProductController {
     constructor(db) {
       this.db = db
     }
-      //! POST sin usar
-    // async saveProduct(data) {
-    //   const content = await fs.readJSON(this.db)
-    //   const ids = content.map((p) => p.id)
-    //   const newId = Math.max(...ids) + 1
-    //   const timestamp = Date.now()
-    //   const newProduct = { id: newId, timestamp, ...data }
-    //   content.push(newProduct)
+    async saveProduct(data) {
+      const content = await fs.readJSON(this.db)
+      const ids = content.map((p) => p.id)
+      const newId = Math.max(...ids) + 1
+      const timestamp = Date.now()
+      const newProduct = { id: newId, timestamp, ...data }
+      content.push(newProduct)
   
-    //   await fs.writeJSON(this.db, content)
-    //   return newProduct
-    // }
+      await fs.writeJSON(this.db, content)
+      return newProduct
+    }
   
     async getAll() {
       try {
@@ -35,20 +34,18 @@ class ProductController {
       return product
     }
   
-  // ! PUT sin usar
-    // async updateById(id, data) {
-    //   const fileContent = await fs.readJSON(this.db)
-    //   const producto = fileContent.map((p) => (p.id === id ? { id: p.id, ...data } : p))
+    async updateById(id, data) {
+      const fileContent = await fs.readJSON(this.db)
+      const producto = fileContent.map((p) => (p.id === id ? { id: p.id, ...data } : p))
   
-    //   await fs.writeJSON(this.db, producto)
-    // }
-  // ! DELETE sin usar
-  //   async removeById(id) {
-  //     const content = await fs.readJSON(this.db)
-  //     const newContent = content.filter((p) => p.id !== id)
+      await fs.writeJSON(this.db, producto)
+    }
+    async removeById(id) {
+      const content = await fs.readJSON(this.db)
+      const newContent = content.filter((p) => p.id !== id)
   
-  //     await fs.writeJSON(this.db, newContent)
-  //   }
+      await fs.writeJSON(this.db, newContent)
+    }
   }
 
 

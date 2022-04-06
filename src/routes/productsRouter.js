@@ -9,7 +9,7 @@ const path = require("path");
 
 const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
 
-const temporal = {
+/* const temporal = {
     "id": db.length + 1,
     "nombre": "zapatos",
     "descripcion": "zapatos",
@@ -18,7 +18,7 @@ const temporal = {
     "precio": 150,
     "stock": 25,
     "timestamp": 1648515364352
-  }
+  } */
 
 
 router.get('/:id?', async (req, res) => {
@@ -34,12 +34,11 @@ router.get('/:id?', async (req, res) => {
     res.send(respuesta)
 })
 
-router.post('/', (request, response) => {
-    if (process.env.ADMIN) {
-        fs.writeFileSync(db.append(temporal))
-    
-    }
-     response.send(db)
+router.post('/', async (req, res) => {
+    const { body } = req
+    const newProduct = await productController.saveProduct(body)
+
+    res.send({ status: 'producto agregado', newProduct })
     });
 
 router.put('/:id', (request, response) => {
@@ -54,9 +53,13 @@ router.put('/:id', (request, response) => {
     }
     })
 
-router.delete('/:id', (request, response) => {
-    delete db[request.params.id]
-    response.send(db)
+router.delete('/:id', async (req, res) => {
+    //delete db[request.params.id +1]
+    const { id } = req.params
+    await productController.removeById(Number(id))
+
+
+    res.send({status: `prudcto ${id} eliminado`})
 })
 
 
