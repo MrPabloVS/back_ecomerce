@@ -48,6 +48,7 @@ class ProductController {
     }
   }
 
+  
 
    const productController = new ProductController(path.join(__dirname, "..","db","productos.json"))
 

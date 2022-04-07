@@ -1,1 +1,4 @@
-[{"id":2,"nombre":"playstation","descripcion":"playstation","codigo":"4613246","foto":"http://foto.com","precio":220,"stock":30,"timestamp":1648515364352},{"id":4,"timestamp":1648557893635,"nombre":"procesador","descripcion":"procesador","codigo":"123456","foto":"http://foto.com","precio":750,"stock":15},{"id":5,"timestamp":1649257830207,"name":"Café2","description":"Café capuchino2","code":10000,"price":500,"stock":500,"thumbnail":"https://cafeengrano.net/wp-content/uploads/2020/11/Cappuccino-500x500.jpg"}]
+[
+    {"id":2,"nombre":"playstation","descripcion":"playstation","codigo":"4613246","foto":"http://foto.com","precio":220,"stock":30,"timestamp":1648515364352},
+    {"id":4,"timestamp":1648557893635,"nombre":"procesador","descripcion":"procesador","codigo":"123456","foto":"http://foto.com","precio":750,"stock":15},
+    {"id":5,"timestamp":1649257830207,"name":"Café2","description":"Café capuchino2","code":10000,"price":500,"stock":500,"thumbnail":"https://cafeengrano.net/wp-content/uploads/2020/11/Cappuccino-500x500.jpg"}]
