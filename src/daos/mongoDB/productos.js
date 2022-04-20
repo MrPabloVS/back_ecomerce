@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const productosCollection = "productos"
 
@@ -10,4 +10,6 @@ const ProductosSchema = new mongoose.Schema({
     timestamp: {type: Number, require: true},
 })
 
-export const usuarios = mongoose.model(productosCollection, ProductosSchema)
+//export const usuarios = mongoose.model(productosCollection, ProductosSchema)
+const productos = mongoose.model(productosCollection, ProductosSchema)
+module.exports =  productos 

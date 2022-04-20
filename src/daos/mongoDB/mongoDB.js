@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import carts from "./carts"
 import productos from "./productos"
 
-mongoose.connect("mongodb+srv://pepe:<password>@cluster0.ieeft.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://pepe:asd123@cluster0.ieeft.mongodb.net/productos?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 },err => {

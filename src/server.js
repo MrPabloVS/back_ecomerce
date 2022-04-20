@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 app.listen(port, () => console.log(`Escuchando puerto ${port}`))
 
 app.get('/express_backend', (req, res) => { 
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
+    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED ' }); 
   });
 
 app.use("/api/productos", productsRouter)

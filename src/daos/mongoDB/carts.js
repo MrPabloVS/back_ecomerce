@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
-const cartsCollection = "productos"
+
+const cartsCollection = "carts"
 
 const CartsSchema = new mongoose.Schema({
     _id: {type: String, require: true},
@@ -8,4 +9,5 @@ const CartsSchema = new mongoose.Schema({
     productos: {type: Object, require: true}
 })
 
-export const usuarios = mongoose.model(cartsCollection, CartsSchema)
+ const carts = mongoose.model(cartsCollection, CartsSchema)
+module.exports = carts
