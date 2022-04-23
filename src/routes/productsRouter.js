@@ -4,7 +4,10 @@ const  productController  = require("../controllers/productController")
 const { Router } = require("express");
 const router = Router()
 const productosModel = require("../daos/mongoDB/productos")
+const db = require("../configs/mongoConfig")
 
+
+//db.connection()
 //const fs = require("fs");
 //const path = require("path");
 
@@ -21,13 +24,13 @@ const productosModel = require("../daos/mongoDB/productos")
     "timestamp": 1648515364352
   } */
 
-  mongoose.connect("mongodb+srv://pepe:asd123@cluster0.ieeft.mongodb.net/productos?retryWrites=true&w=majority",{
+ /*  mongoose.connect("mongodb+srv://pepe:asd123@cluster0.ieeft.mongodb.net/productos?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 },err => {
     if(err) throw new Error("Error al conectarse a mongo atlas")
     console.log("Conectado a mongo atlas productos")
-})
+}) */
 
 
 router.get('/:id?', async (req, res) => {
@@ -44,7 +47,8 @@ router.get('/:id?', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { body } = req
-    const newProduct = await new productosModel({body}) //productController.saveProduct(body)
+    const newProduct = await new productosModel({body})//productController.saveProduct(body)
+    newProduct.save()
 
     res.send({ status: 'producto agregado', newProduct })
     });

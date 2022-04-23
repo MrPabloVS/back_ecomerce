@@ -5,23 +5,28 @@ const cartController = require("../controllers/cartController")
 const router = Router()
 //const db = JSON.parse(fs.readFileSync(path.join(__dirname,"..","db","carts.json")))
 //const products = JSON.parse(fs.readFileSync(path.join(__dirname, "..","db","productos.json")))
-const db = fs.readFileSync(path.join(__dirname,"..","db","carts.json"))
+//const db = fs.readFileSync(path.join(__dirname,"..","db","carts.json"))
 //const products = fs.readFileSync(path.join(__dirname, "..","db","productos.json"))
 const mongoose = require("mongoose")
 const cartsModel = require("../daos/mongoDB/carts")
+const db = require("../configs/mongoConfig")
 
-mongoose.connect("mongodb+srv://pepe:asd123@cluster0.ieeft.mongodb.net/carts?retryWrites=true&w=majority",{
+
+//db.connection()
+
+/* mongoose.connect("mongodb+srv://pepe:asd123@cluster0.ieeft.mongodb.net/carts?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 },err => {
     if(err) throw new Error("Error al conectarse a mongo atlas")
-    console.log("Conectado a mongo atlas carts")})
+    console.log("Conectado a mongo atlas carts")}) */
 
 router.post("/", async (req, res) => {
     //const respuesta = await cartController.saveCart()
 
     const { body } = req
     const newProduct = await new cartsModel({body})
+    newProduct.save()
 
     res.send({cartId: body.id}) 
 })
